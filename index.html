@@ -1,0 +1,878 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Carteirinha de Permissão</title>
+    <style>
+
+#photo::file-selector-button {
+  margin-right: 20px;
+  border: none;
+  background: #416D19;
+  color: #fff;
+  border-radius: 5px;
+  padding: 10px 20px;
+  margin-top: 2px;
+}
+#photo::file-selector-button:hover{
+  background: #03c242;
+}
+
+body, html {
+      height: 40%;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+    }
+/* inicio formulario */
+
+.conteinerPai{
+    top: 430px;
+    width: 540px;
+    position: relative;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    }
+
+.boxFilho{
+  position: relative;
+  max-width: 500px;
+  width: 100%;
+  border-radius: 6px;
+  padding: 30px;
+  margin: 0 15px;
+  background-color: #fff;
+  box-shadow: 0 5px 10px rgba(0,0,0,0.1);
+}
+.boxFilho .titulobox{
+  position: relative;
+  font-size: 20px;
+  font-weight: 600;
+  color: #333;
+}
+.boxFilho .titulobox::before{
+  content: "";
+  position: absolute;
+  left: 0;
+  bottom: -2px;
+  height: 3px;
+  width: 27px;
+  border-radius: 8px;
+  background-color: #416D19;
+}
+.boxFilho form{
+  position: relative;
+  margin-top: 16px;
+  min-height: 420px;
+  background-color: #fff;
+  overflow: scroll;
+}
+.boxFilho form::-webkit-scrollbar{
+  display: none;
+}
+.boxFilho form .form{
+  position: absolute;
+  background-color: #fff;
+}
+.boxFilho form .titleform{
+  display: block;
+  margin-bottom: 8px;
+  font-size: 20px;
+  font-weight: 800;
+  margin: 6px 0;
+  color: #333;
+}
+.boxFilho form .campos{
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  flex-wrap: wrap;
+}
+form .campos .input-Campo{
+  display: flex;
+  width: calc(100% / 2 - 15px);
+  flex-direction: column;
+}
+.input-Campo label {
+  font-size: 15px;
+  font-weight: 500;
+  color: #2e2e2e;
+}
+.input-Campo input{
+  outline: none;
+  font-size: 14px;
+  font-weight: 400;
+  color: #333;
+  border-radius: 5px;
+  border: 1px solid #aaa;
+  padding: 0 15px;
+  height: 42px;
+  margin: 8px 0;
+}
+.input-Campo input{
+  box-shadow: 0 3px 6px rgba(0,0,0,0.13);
+}
+.input-Campo input[type="date"]{
+  color: #707070;
+}
+.input-Campo input[type="date"]:valid{
+  color: #333;
+}
+.inputt-CampoMot{
+  display: flex;
+  flex-direction: column;
+}
+.inputt-CampoMot input{
+  box-shadow: 0 3px 6px rgba(0,0,0,0.13);
+}
+.nome{
+  outline: none;
+  font-size: 14px;
+  font-weight: 400;
+  color: #333;
+  border-radius: 5px;
+  border: 1px solid #aaa;
+  padding: 0 15px;
+  height: 42px;
+  margin: 8px 0
+}
+	    
+/* inicio select */
+
+.input-Campo select{
+  font-size: 12px;
+  font-weight: 500;
+  background-color: #fff;
+  color: #2e2e2e;
+}
+.input-Campo select{
+  outline: none;
+  font-size: 14px;
+  font-weight: 400;
+  color: #333;
+  border-radius: 5px;
+  border: 1px solid #aaa;
+  padding: 0 15px;
+  height: 42px;
+  margin: 8px 0;
+}
+.input-Campo select:is(:focus, :valid){
+  box-shadow: 0 3px 6px rgba(0,0,0,0.13);
+}
+.input-Campo select{
+  color: #707070;
+}
+.input-Campo select:valid{
+  color: #333;
+}
+
+/* fim select */
+
+/* fim formulario */
+
+/*Inicio*/
+
+@media (max-width: 750px) {
+
+.open {
+  display: block;
+}
+form .campos .input-Campo{
+  display: flex;
+  width: calc(100% / 2 - 15px);
+  flex-direction: column;
+}
+
+}
+
+@media (max-width: 550px){
+form .campos .input-Campo{
+  display: flex;
+  width: 100%;
+  flex-direction: column;
+}
+}
+/*Fim*/
+
+.card {
+            width: 474px; /* Largura da carteirinha */
+            height: 280px; /* Altura da carteirinha */
+            border: 1px solid #000;
+            overflow: hidden;
+            box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+            margin: 10px;
+            background: #fff;
+            padding: 10px;
+            position: absolute;
+
+        }
+        .front, .back {
+            width: 100%;
+            height: 100%;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            text-align: center;
+            padding: 10px;
+        }
+        .front .photo-container {
+            position: absolute;
+            top: 1.3mm;
+            right: 2mm; 
+            width: 30mm; 
+            height: 40mm; 
+            border: 1px solid #000;
+            background-color: #ffffff;
+            overflow: hidden;
+
+        }
+        .front .details-container, .back .details-container {
+            width: 60%;
+            display: flex;
+            flex-direction: column;
+            align-items: flex-start;
+            justify-content: flex-start;
+            padding-right: 10px;
+            text-align: left;
+        }
+        /* box foto */
+        .photo-container img {
+            width: 100%; /* Preenche a largura do contêiner */
+            height: 100%; /* Preenche a altura do contêiner */
+            object-fit: cover; /* Ajusta a imagem para cobrir o contêiner */
+            position: absolute;
+            top: 0; /* Ajusta a imagem para o topo do contêiner */
+            left: 0; /* Ajusta a imagem para a esquerda do contêiner */
+        }
+            /* box foto fim*/
+
+         /* 1º box */
+
+        .logo {
+            position: absolute;
+            left: 10px;
+            top: 5px;
+            width: 60px; 
+            height: auto;
+        }
+        .logo img {
+            width: 100%;
+            height: 62px;
+        }
+        .ccfex-fsj {
+            position: absolute;
+            left: 150px; 
+            top: 13px; 
+            font-size: 24px;
+            font-weight: bold;
+        }
+        .title {
+            position: absolute;
+            left: 75px; 
+            top: 40px; 
+            font-size: 15.5px;
+            font-weight: bold;
+        }
+
+        /* linhas */
+        .linha2 {
+            width: 355px;  
+            height: 1px; 
+            background-color: black;
+            position: absolute; 
+            top: 5px;  
+            left: 8px; 
+        }
+        .linha1 {
+            width: 355px;  
+            height: 1px; 
+            background-color: black;
+            position: absolute; 
+            top: 65px;  
+            left: 8px; 
+        }
+        .linha-vertical1 {
+            width: 1px;  
+            height: 61px;
+            background-color: black; 
+            position: absolute; 
+            top: 5px;  
+            left: 7px;  
+        }
+
+        .linha-vertical2 {
+            width: 1px;  
+            height: 61px;
+            background-color: black; 
+            position: absolute; 
+            top: 5px;  
+            left: 362px;  
+        }
+           /* 1º box fim */
+
+/* card front */
+        /* linha */
+  
+        .linhaNInsc1OSup {
+            width: 125px;  
+            height: 1px; 
+            background-color: black;
+            position: absolute; 
+            top: 90px;  
+            left: 8px; 
+        }
+        .linhaNInsc1VEs {
+            width: 1px;  
+            height: 25px;
+            background-color: black; 
+            position: absolute; 
+            top: 90px;  
+            left: 8px;  
+        }
+        .linhaNInsc2OInf {
+            width: 125px;
+            height: 1px;
+            background-color: black;
+            position: absolute; 
+            top: 114px;  
+            left: 8px; 
+        }
+        .linhaNInsc2VDir {
+            width: 1px;  
+            height: 25px;
+            background-color: black; 
+            position: absolute; 
+            top: 90px;  
+            left: 133px;  
+        }
+
+        .linhaDat1OSup{
+            width: 135px;  
+            height: 1px; 
+            background-color: black;
+            position: absolute; 
+            top: 90px;  
+            left: 200px;
+        }
+        .linhaDat2OInf{
+            width: 135px;  
+            height: 1px; 
+            background-color: black;
+            position: absolute; 
+            top: 114.5px;  
+            left: 200px;
+        }
+        .linhaDat1VEs {
+            width: 1px;  
+            height: 25px;
+            background-color: black; 
+            position: absolute; 
+            top: 90px;  
+            left: 200px; 
+        }
+        .linhaDat2VDir {
+            width: 1px;  
+            height: 25.5px;
+            background-color: black; 
+            position: absolute; 
+            top: 90px;  
+            left: 335px; 
+        }
+
+        .linhaPermis1OSup{
+            width: 135px;  
+            height: 1px; 
+            background-color: black;
+            position: absolute; 
+            top: 135px;  
+            left: 8px;
+        }         
+        .linhaPermis1OInf{
+            width: 135px;  
+            height: 1px; 
+            background-color: black;
+            position: absolute; 
+            top: 160px;  
+            left: 8px;
+        }
+        .linhaPermis2VDir {
+            width: 1px;  
+            height: 26px;
+            background-color: black; 
+            position: absolute; 
+            top: 135px;  
+            left: 143px; 
+        }
+        .linhaPermis2VEs {
+            width: 1px;  
+            height: 26px;
+            background-color: black; 
+            position: absolute; 
+            top: 135px;  
+            left: 8px; 
+        }
+
+        .linhaTypeCPF1OSup{
+            width: 135px;  
+            height: 1px; 
+            background-color: black;
+            position: absolute; 
+            top: 135px;  
+            left: 200px;
+        }         
+        .linhaTypeCPF1OInf{
+            width: 135px;  
+            height: 1px; 
+            background-color: black;
+            position: absolute; 
+            top: 160px;  
+            left: 200px;
+        }
+        .linhaTypeCPF2VEs {
+            width: 1px;  
+            height: 26px;
+            background-color: black; 
+            position: absolute; 
+            top: 135px;  
+            left: 200px; 
+        }
+        .linhaTypeCPF2VDir {
+            width: 1px;  
+            height: 26px;
+            background-color: black; 
+            position: absolute; 
+            top: 135px;  
+            left: 335px; 
+        }
+
+        .linhaNome1OSup{
+            width: 478px;  
+            height: 1px; 
+            background-color: black;
+            position: absolute; 
+            top: 180px;  
+            left: 8px;
+        }         
+        .linhaNome1OInf{
+            width: 478px;  
+            height: 1px; 
+            background-color: black;
+            position: absolute; 
+            top: 205px;  
+            left: 8px;
+        }
+        .linhaNome2VEs {
+            width: 1px;  
+            height: 25px;
+            background-color: black; 
+            position: absolute; 
+            top: 180px;  
+            left: 8px; 
+        }
+        .linhaNome2VDir {
+            width: 1px;  
+            height: 25px;
+            background-color: black; 
+            position: absolute; 
+            top: 180px;  
+            left: 485px; 
+        }
+
+
+
+
+        
+        /* linha fim */
+
+        .nIncricaocard{
+            position: absolute;
+            top: 55px;
+            left: 8px;
+        }
+        .tipoPermissao{
+            position: absolute;
+            top: 100px;
+            left: 8px;
+        }
+        .dateValidade{
+            position: absolute;
+            top: 55px;
+            left: 200px;
+        }
+        .cpfcard{
+            position: absolute;
+            top: 100px;
+            left: 200px;
+        }
+        .nomeCard{
+            position: absolute;
+            top: 145px;
+            left: 10px;
+        }
+        .signature {
+            width: 65%;
+            border-top: 1px solid #000; 
+            text-align: center;
+            position: absolute;
+            left: 80px;
+            bottom: 40px;
+        }
+        .assinat{
+            position: absolute;
+            top: 260px;
+            left: 75px;
+        }
+
+        /* card front fim */
+
+        /* card back  */
+
+        .normas strong {
+            font-weight: bold;
+        }
+        .Ntitulo{
+            position: absolute;
+            left: 180px;
+            top: 15px;
+        }
+        .normas {
+            margin-top: auto; /* Alinha no final da carteirinha */
+            text-align: left;
+            font-size: 11.2px;
+        }
+        /* card back fim */
+
+        /* respostas */
+
+        .inscri{
+            position: absolute;
+            top: 77px;
+            left: 35px;
+        }
+        .resdate{
+            position: absolute;
+            top: 77px;
+            left: 230px;
+        }
+        .tipoPermis{
+            position: absolute;
+            top: 122px;
+            left: 40px;
+        }
+        .respCpf{
+            position: absolute;
+            top: 122px;
+            left: 216px;
+        }
+        .namecart{
+            position: absolute;
+            top: 167px;
+            left: 20px;
+        }
+        /* fim respostas */
+        
+        /* button */
+
+        .buttonss {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        height: 5px;
+        width: 100%;
+        border: none;
+        outline: none;
+        color: #fff;
+        border-radius: 5px;
+        margin: 25px 0;
+        transition: all 0.3s linear;
+        cursor: pointer;
+        }
+        .buttonpdfger, .buttonresert{
+        font-size: 16px;
+        font-weight: 400;
+        cursor: pointer;
+        color: #fff;
+        border: 0 none;
+        text-decoration: none;
+}
+.buttonpdfger, .buttonresert{
+  border: none;
+  background: none;
+}
+
+.buttonpdfger, .buttonresert{
+  display: flex;
+  align-items: center;
+  
+}
+.buttonpdfger, .buttonresert{
+  margin-right: 24px;
+}
+.buttonpdfger, .buttonresert{
+  border-radius: 8px;
+  padding: 10px;
+  background-color: #416D19;
+  
+}
+.buttonpdfger:hover, .buttonresert:hover{
+  background-color: #03c242;
+}
+
+       /* button */
+    </style>
+</head>
+<body>
+
+    <div class="card" id="cardFront">
+        <div class="logo">
+            <img src="data:image/png;base64,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" alt="Logo">
+        </div>
+
+        <div class="ccfex-fsj">
+            CCFEx/FSJ
+        </div>
+
+        <!-- linhas -->
+        <div class="linha1"></div>
+        <div class="linha-vertical1"></div>
+        <div class="linha2"></div>
+        <div class="linha-vertical2"></div>
+
+             <div class="linhaNInsc1OSup"></div>           
+             <div class="linhaNInsc2OInf"></div>
+             <div class="linhaNInsc1VEs"></div>
+             <div class="linhaNInsc2VDir"></div>
+
+             <div class="linhaDat1OSup"></div>
+             <div class="linhaDat2OInf"></div>
+             <div class="linhaDat1VEs"></div>
+             <div class="linhaDat2VDir"></div>
+
+             <div class="linhaPermis1OSup"></div>
+             <div class="linhaPermis1OInf"></div>
+             <div class="linhaPermis2VEs"></div>
+             <div class="linhaPermis2VDir"></div>
+
+             <div class="linhaTypeCPF1OSup"></div>
+             <div class="linhaTypeCPF1OInf"></div>
+             <div class="linhaTypeCPF2VEs"></div>
+             <div class="linhaTypeCPF2VDir"></div>
+
+             <div class="linhaNome1OSup"></div>
+             <div class="linhaNome1OInf"></div>
+             <div class="linhaNome2VEs"></div>
+             <div class="linhaNome2VDir"></div>
+             
+        <!-- linhas Fim-->
+
+        <div class="title">
+            Centro de Capacitação Física do Exército
+        </div>
+
+       <div class="front">
+        
+        <div class="nIncricaocard"><p id="registrationPreview">Nº inscrição:</p></div>
+        <div class="dateValidade"><p id="">Data de Validade:</p></div>
+        <div class="tipoPermissao"><p id="permissionTypePreview">Tipo de Permissão:</p></div>
+        <div class="cpfcard"><p id="cpfPreview">CPF:</p></div>
+        <div class="nomeCard"><p id="namePreview">Nome:</p ></div>
+
+
+
+        <div class="inscri"><p id="rinscrPreview"></p></div>
+        <div class="resdate"><p id="validityPreview"></p></div>
+        <div class="tipoPermis"><p id="permissionPreview"></p></div>
+        <div class="respCpf"><p id="cpfPreviewcard"></p></div>
+        <div class="namecart"><p id="namecartPreviewcard"></p></div>
+
+
+        
+
+        <div class="signature">
+            
+        </div>
+        <div class="assinat">
+            Gen Bda - RICARDO SANTOS <strong>TARANTO</strong> <br>
+            Chefe do Centro de Capacitação Física do Exército
+        </div>
+            <div class="photo-container">
+                <img src="" id="photoPreview" alt="Foto">
+            </div>
+        </div>
+    </div>
+
+    <div class="card" id="cardBack" style="display: none;">
+        <div class="back">
+            <div class="Ntitulo">NORMAS GERAIS</div>
+            <div class="normas">
+                <p>1. <strong>APRESENTAR</strong> esta carteirinha na entrada, ou sempre que solicitada;</p>
+                <p>2. Horário de utilização da praia: 07h00 às 18h30;</p>
+                <p>3. Somente terão acesso à área da Fortaleza os Portadores de Permissão individuais;</p>
+                <p>4. O desacato aos militares do CCFEx é configurado crime militar, passível de detenção de dois meses a dois anos ou multa;</p>
+                <p>5. Obedeça as normas de utilização descritas nas placas informativas e em nossos canais de comunicação (<a href="http://www.ccfex.eb.mil.br" target="_blank">www.ccfex.eb.mil.br</a>);</p>
+                <p>6. Obedeça as sinalizações das áreas de estacionamento;</p>
+                <p>7. Qualquer dúvida, dirija-se à RP do CCFEx, durante o expediente;</p>
+                <p>8. O não cumprimento das presentes normas poderá acarretar na imediata suspensão desta carteira;</p>
+                <p>9. A presente carteira é <strong>PESSOAL</strong> e <strong>INTRANSFERÍVEL</strong>. Na posse de outra pessoa, ocasionará sua cassação.</p>
+            </div>
+        </div>
+    </div>
+
+
+    <div class="conteinerPai">
+        <div class="boxFilho">
+    
+            <div class="titulobox">Gerar Carteirinha</div>
+    
+        <form id="cardForm">
+    
+            <!-- INFORMÇÕES DO PERMISSIONARIO -->
+    
+            <div class="form 1">
+            <div class="detalhesPessoais">
+            <span class="titleform">INFORMAÇÕES DA CARTEIRINHA</span>
+    
+            <div class="campos">
+    
+            <div class="input-Campo">
+            <label for="ninscric">Nº INSCRIÇÃO:</label>
+            <input type="text" id="inscri" name="inscri" maxlength="10" pattern="\d{10}" style="text-align: center;" oninput="this.value = this.value.replace(/[^0-9]/g, '')"  required>
+            </div>
+
+            <div class="input-Campo">
+                <label for="permissao">PERMISSÃO:</label>
+                <select id="tipoPermis" name="tipoPermis">
+                    <option value="(-)">ESCOLHA UMA OPÇÃO</option>
+                    <option value="PRAIA">PRAIA</option>
+                    <option value="NÁUTICA">NÁUTICA</option>
+                    <option value="PESCA">PESCA</option>
+                </select>
+            </div>
+
+            <div class="input-Campo">
+                <label for="dataValidade">DATA DE VALIDADE:</label>
+                <input type="date" id="resdate" name="resdate">
+            </div>
+
+            <div class="input-Campo">
+            <label for="photo">Foto:</label>
+            <input type="file" id="photo" name="photo" accept="image/*"><br>
+            </div>
+ 
+            <div class="input-Campo">
+                <label for="cardcpff">CPF</label>
+                <input type="text" id="respCpf" name="respCpf">
+               </div>
+            </form>
+            <!-- <div class="input-Campo">
+                <label for="teste">TESTE:</label>
+                <input type="text" id="inscri" name="inscri" oninput="this.value = this.value.toUpperCase()" pattern="[A-Za-záàâãéèêíïóôõöúçñÁÀÂÃÉÈÍÏÓÔÕÖÚÇÑ ]+$" required>
+                </div> -->
+    
+          </div>
+    </div>
+        <div class="inputt-CampoMot">
+        <label for="nome">NOME:</label>
+        <input class="nome" type="text" id="namecart" name="namecart" oninput="this.value = this.value.toUpperCase()" pattern="[A-Za-záàâãéèêíïóôõöúçñÁÀÂÃÉÈÍÏÓÔÕÖÚÇÑ ]+$">
+       </div>
+       <div class="buttonss">
+        <button class="buttonpdfger" type="button" onclick="generatePDF()">Gerar PDF</button>
+        <button class="buttonresert" type="reset">reset</button>
+       </div>
+
+
+
+<!-- Inclua o jQuery -->
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+
+<!-- Inclua o plugin de máscara jQuery Mask Plugin -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery.mask/1.14.16/jquery.mask.min.js"></script>
+ <!-- Mascara de input fim -->
+
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
+    <script>
+        const { jsPDF } = window.jspdf;
+
+        document.getElementById('photo').addEventListener('change', function (e) {
+            const file = e.target.files[0];
+            if (file) {
+                const reader = new FileReader();
+                reader.onload = function (event) {
+                    document.getElementById('photoPreview').src = event.target.result;
+                };
+                reader.readAsDataURL(file);
+            }
+        });
+
+        function updatePreview() {
+            // document.getElementById('namePreview').textContent =`Nome: ${document.getElementById('nome').value}`;
+            // document.getElementById('cpfPreview').textContent = `CPF: ${document.getElementById('cpf').value}`;
+            // document.getElementById('registrationPreview').textContent = `Nº Inscrição: ${document.getElementById('ninscric').value}`;
+            // document.getElementById('validityPreview').textContent = `Data de Validade: ${document.getElementById('dataValidade').value}`;
+            // document.getElementById('permissionTypePreview').textContent = `Tipo de Permissão: ${document.getElementById('permissao').value}`;
+            document.getElementById('rinscrPreview').textContent = document.getElementById('inscri').value;
+            document.getElementById('validityPreview').textContent = document.getElementById('resdate').value;
+            document.getElementById('permissionPreview').textContent = document.getElementById('tipoPermis').value;
+            document.getElementById('cpfPreviewcard').textContent = document.getElementById('respCpf').value;
+            document.getElementById('namecartPreviewcard').textContent = document.getElementById('namecart').value;
+        }
+
+        document.getElementById('namecart').addEventListener('input', updatePreview);
+        document.getElementById('resdate').addEventListener('input', updatePreview);
+        document.getElementById('inscri').addEventListener('input', updatePreview);
+        document.getElementById('tipoPermis').addEventListener('select', updatePreview);
+        document.getElementById('respCpf').addEventListener('input', updatePreview);
+
+
+        function generatePDF() {
+            updatePreview();
+
+            const cardFront = document.getElementById('cardFront');
+            const cardBack = document.getElementById('cardBack');
+
+            // Ajuste na resolução para melhor qualidade
+            const scale = 2; // Aumenta a escala para melhor qualidade
+            const options = {
+                scale: scale, // Aumenta a escala para melhor qualidade
+                useCORS: true, // Habilita o uso de CORS para imagens externas
+                logging: true // Habilita o logging para verificar problemas
+            };
+
+            html2canvas(cardFront, options).then(frontCanvas => {
+                const frontImg = frontCanvas.toDataURL('image/png');
+
+                cardBack.style.display = 'flex'; // Temporarily show back card for screenshot
+                html2canvas(cardBack, options).then(backCanvas => {
+                    const backImg = backCanvas.toDataURL('image/png');
+                    cardBack.style.display = 'none'; // Hide back card after screenshot
+
+                    const pdf = new jsPDF('portrait', 'px', [595, 842]); // Tamanho da folha A4 em pixels
+
+                    // Add front side
+                    pdf.addImage(frontImg, 'PNG', 125, 150, 350, 220);//tamanho carteirinha
+
+                    // Add back side next to front side
+                    pdf.addImage(backImg, 'PNG', 125, 420, 350, 220);
+
+                    // pdf.addImage(backImg, 'PNG', 100, 420, 400, 250);
+                    pdf.save('carteirinha.pdf');
+                });
+            });
+        }
+
+        $(document).ready(function(){
+
+//CPF
+
+  $("#respCpf").mask("999.999.999-99");
+
+
+});
+
+    </script>
+</body>
+</html>
